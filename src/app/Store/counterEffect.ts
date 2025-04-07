@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of, switchMap, tap, withLatestFrom } from "rxjs";
-import {  incremetType, initType, setInit } from "./counterAction";
+import {  decrementType, incremetType, initType, setInit } from "./counterAction";
 import { Store } from "@ngrx/store";
 import { selectcounter } from "./counterSelector";
 
@@ -23,7 +23,7 @@ export class CounterEffect{
 
 
     saveCounter=createEffect(()=>this.actions$.pipe(
-        ofType(incremetType),
+        ofType(incremetType,decrementType),
         withLatestFrom(this.store.select(selectcounter)),// it gives a latest data from that state.
         tap((data)=>{
             console.log(data[1]);
